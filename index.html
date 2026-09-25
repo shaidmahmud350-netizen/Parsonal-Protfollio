@@ -1,0 +1,1521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shaid Mahmud — Amazon FBA & Data Strategy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0B0F14;
+    --bg-panel:#121822;
+    --bg-panel-2:#1A222E;
+    --border:#232C38;
+    --accent:#F5A623;
+    --accent-soft:rgba(245,166,35,0.14);
+    --accent-2:#35D0C9;
+    --accent-2-soft:rgba(53,208,201,0.14);
+    --text:#E9EEF3;
+    --text-muted:#8C97A6;
+    --text-dim:#5D6874;
+    --radius:10px;
+    --display:'Space Grotesk',sans-serif;
+    --mono:'IBM Plex Mono',monospace;
+    --body:'Inter',sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important;}
+  }
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--body);
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none;}
+  ::selection{background:var(--accent);color:#0B0F14;}
+  :focus-visible{outline:2px solid var(--accent-2);outline-offset:3px;}
+
+  .wrap{max-width:1120px;margin:0 auto;padding:0 32px;}
+  @media (max-width:640px){.wrap{padding:0 20px;}}
+
+  /* background grid texture */
+  .grid-bg{
+    position:fixed;inset:0;z-index:-2;
+    background-image:
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size:64px 64px;
+    opacity:0.25;
+    mask-image:radial-gradient(ellipse 80% 60% at 50% 0%, black 20%, transparent 75%);
+  }
+  .glow{
+    position:fixed;top:-200px;right:-200px;width:600px;height:600px;z-index:-1;
+    background:radial-gradient(circle, var(--accent-soft), transparent 70%);
+    filter:blur(40px);pointer-events:none;
+  }
+
+  /* NAV */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    backdrop-filter:blur(12px);
+    background:rgba(11,15,20,0.75);
+    border-bottom:1px solid var(--border);
+  }
+  nav{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:18px 32px;max-width:1120px;margin:0 auto;
+  }
+  .logo{
+    font-family:var(--mono);font-size:15px;font-weight:500;
+    letter-spacing:0.02em;color:var(--text);
+    display:flex;align-items:center;gap:8px;
+  }
+  .logo .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);
+    box-shadow:0 0 8px var(--accent);animation:pulse 2.4s ease-in-out infinite;}
+  @keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.35;}}
+  .nav-links{display:flex;gap:22px;font-size:13.5px;color:var(--text-muted);}
+  .nav-links a{position:relative;padding:4px 0;transition:color .2s;}
+  .nav-links a:hover, .nav-links a.active{color:var(--text);}
+  .nav-links a.active::after{
+    content:'';position:absolute;left:0;bottom:-6px;width:100%;height:2px;background:var(--accent);
+  }
+  .nav-cta{
+    font-family:var(--mono);font-size:13px;
+    border:1px solid var(--border);padding:8px 16px;border-radius:6px;
+    color:var(--text);transition:all .2s;
+  }
+  .nav-cta:hover{border-color:var(--accent);color:var(--accent);}
+  .burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px;}
+  .burger span{width:22px;height:2px;background:var(--text);display:block;}
+  @media (max-width:800px){
+    .nav-links{display:none;}
+    .nav-cta{display:none;}
+    .burger{display:flex;}
+  }
+  .mobile-menu{
+    display:none;flex-direction:column;gap:0;
+    background:var(--bg-panel);border-bottom:1px solid var(--border);
+  }
+  .mobile-menu.open{display:flex;}
+  .mobile-menu a{padding:16px 32px;border-top:1px solid var(--border);font-size:14px;color:var(--text-muted);}
+
+  section{padding:120px 0 40px;}
+  .eyebrow{
+    font-family:var(--mono);font-size:12px;letter-spacing:0.12em;text-transform:uppercase;
+    color:var(--accent-2);display:flex;align-items:center;gap:10px;margin-bottom:18px;
+  }
+  .eyebrow::before{content:'';width:24px;height:1px;background:var(--accent-2);}
+  h2.section-title{
+    font-family:var(--display);font-size:clamp(28px,4vw,40px);font-weight:600;
+    margin-bottom:12px;letter-spacing:-0.01em;
+  }
+  .section-sub{color:var(--text-muted);max-width:560px;margin-bottom:56px;font-size:15.5px;}
+
+  /* HERO */
+  .hero{padding-top:180px;padding-bottom:100px;position:relative;}
+  .hero-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:56px;align-items:center;}
+  @media (max-width:900px){.hero-grid{grid-template-columns:1fr;gap:48px;}}
+  .hero-eyebrow{
+    font-family:var(--mono);font-size:13px;color:var(--accent);
+    display:flex;align-items:center;gap:10px;margin-bottom:24px;
+  }
+  .hero-eyebrow .bracket{color:var(--text-dim);}
+  h1{
+    font-family:var(--display);font-weight:700;
+    font-size:clamp(38px,5.4vw,60px);line-height:1.04;letter-spacing:-0.02em;
+    margin-bottom:24px;
+  }
+  h1 .accent-text{color:var(--accent);}
+  .hero-desc{color:var(--text-muted);font-size:17px;max-width:480px;margin-bottom:36px;}
+  .hero-cta-group{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:56px;}
+  .btn-primary, .btn-secondary{
+    font-family:var(--body);font-weight:600;font-size:14.5px;
+    padding:14px 26px;border-radius:8px;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:8px;
+  }
+  .btn-primary{background:var(--accent);color:#0B0F14;border:1px solid var(--accent);}
+  .btn-primary:hover{background:#ffb84d;transform:translateY(-1px);}
+  .btn-secondary{background:transparent;color:var(--text);border:1px solid var(--border);}
+  .btn-secondary:hover{border-color:var(--text-muted);}
+  .hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--border);padding-top:28px;}
+  .hero-stat{padding-right:16px;}
+  .hero-stat .num{font-family:var(--mono);font-size:26px;font-weight:500;color:var(--text);}
+  .hero-stat .num .suffix{color:var(--accent);}
+  .hero-stat .label{font-size:12.5px;color:var(--text-dim);margin-top:4px;}
+
+  /* dashboard card - signature element */
+  .dash-card{
+    background:var(--bg-panel);border:1px solid var(--border);border-radius:14px;
+    padding:22px;position:relative;overflow:hidden;
+  }
+  .dash-card::before{
+    content:'';position:absolute;top:0;left:0;right:0;height:1px;
+    background:linear-gradient(90deg,transparent,var(--accent-2),transparent);
+  }
+  .dash-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;}
+  .dash-head .title{font-family:var(--mono);font-size:12.5px;color:var(--text-muted);letter-spacing:0.04em;}
+  .dash-head .live{
+    font-family:var(--mono);font-size:11px;color:var(--accent-2);display:flex;align-items:center;gap:6px;
+  }
+  .live-dot{width:6px;height:6px;border-radius:50%;background:var(--accent-2);animation:pulse 1.6s infinite;}
+  .scout-row{
+    display:flex;justify-content:space-between;align-items:center;
+    padding:12px 0;border-bottom:1px solid var(--border);font-family:var(--mono);font-size:12.5px;
+    opacity:0;transform:translateY(6px);
+    animation:rowIn .5s ease forwards;
+  }
+  .scout-row:last-child{border-bottom:none;}
+  @keyframes rowIn{to{opacity:1;transform:translateY(0);}}
+  .scout-asin{color:var(--text-muted);}
+  .scout-name{color:var(--text);font-family:var(--body);font-size:13px;font-weight:500;}
+  .scout-metrics{display:flex;gap:14px;align-items:center;}
+  .scout-roi{color:var(--accent);}
+  .scout-roi.neg{color:#E36A6A;}
+  .spark{width:56px;height:20px;}
+  .dash-footer{
+    margin-top:16px;padding-top:16px;border-top:1px dashed var(--border);
+    font-family:var(--mono);font-size:11px;color:var(--text-dim);display:flex;justify-content:space-between;
+  }
+
+  /* ABOUT */
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;}
+  @media (max-width:800px){.about-grid{grid-template-columns:1fr;gap:32px;}}
+  .about-text p{color:var(--text-muted);margin-bottom:16px;font-size:15.5px;}
+  .about-text strong{color:var(--text);font-weight:600;}
+  .fact-list{display:flex;flex-direction:column;gap:0;}
+  .fact-row{
+    display:flex;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--border);
+    font-size:14px;
+  }
+  .fact-row .k{color:var(--text-dim);font-family:var(--mono);font-size:12.5px;}
+  .fact-row .v{color:var(--text);text-align:right;max-width:60%;}
+
+  /* EXPERIENCE - timeline */
+  .timeline{position:relative;padding-left:32px;border-left:1px solid var(--border);}
+  .tl-item{position:relative;padding-bottom:36px;cursor:pointer;}
+  .tl-item:last-child{padding-bottom:0;}
+  .tl-dot{
+    position:absolute;left:-37px;top:2px;width:12px;height:12px;border-radius:50%;
+    background:var(--bg);border:2px solid var(--text-dim);transition:all .25s;
+  }
+  .tl-item.current .tl-dot{border-color:var(--accent);background:var(--accent);box-shadow:0 0 0 4px var(--accent-soft);}
+  .tl-header{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;}
+  .tl-role{font-family:var(--display);font-size:19px;font-weight:600;}
+  .tl-date{font-family:var(--mono);font-size:12px;color:var(--text-dim);white-space:nowrap;}
+  .tl-company{color:var(--accent-2);font-size:13.5px;margin-top:2px;font-weight:500;}
+  .tl-toggle{
+    font-family:var(--mono);font-size:11px;color:var(--text-dim);margin-top:8px;
+    display:flex;align-items:center;gap:6px;
+  }
+  .tl-toggle .chev{transition:transform .25s;display:inline-block;}
+  .tl-item.open .tl-toggle .chev{transform:rotate(90deg);}
+  .tl-body{
+    max-height:0;overflow:hidden;transition:max-height .35s ease;
+  }
+  .tl-item.open .tl-body{max-height:400px;}
+  .tl-body ul{padding:14px 0 0 18px;color:var(--text-muted);font-size:14px;}
+  .tl-body li{margin-bottom:8px;}
+
+  /* INTERNSHIPS */
+  .intern-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+  @media (max-width:800px){.intern-grid{grid-template-columns:1fr;}}
+  .intern-card{
+    background:var(--bg-panel);border:1px solid var(--border);border-radius:14px;
+    padding:30px;position:relative;overflow:hidden;
+  }
+  .intern-card::before{
+    content:'';position:absolute;top:0;left:0;right:0;height:1px;
+    background:linear-gradient(90deg,transparent,var(--accent),transparent);
+  }
+  .intern-tag{
+    font-family:var(--mono);font-size:10.5px;letter-spacing:0.06em;color:var(--accent);
+    background:var(--accent-soft);display:inline-block;padding:4px 10px;border-radius:20px;margin-bottom:16px;
+  }
+  .intern-card h3{font-family:var(--display);font-size:19px;font-weight:600;margin-bottom:4px;}
+  .intern-company{color:var(--accent-2);font-size:13px;font-weight:500;margin-bottom:2px;}
+  .intern-date{font-family:var(--mono);font-size:11.5px;color:var(--text-dim);margin-bottom:20px;}
+  .intern-label{
+    font-family:var(--mono);font-size:11px;letter-spacing:0.06em;text-transform:uppercase;
+    color:var(--text-dim);margin-bottom:8px;margin-top:20px;
+  }
+  .intern-card p{color:var(--text-muted);font-size:14px;}
+  .intern-takeaways{
+    list-style:none;padding:0;margin:0 0 4px 0;display:flex;flex-direction:column;gap:7px;
+  }
+  .intern-takeaways li{
+    color:var(--text-muted);font-size:13.5px;padding-left:18px;position:relative;line-height:1.5;
+  }
+  .intern-takeaways li::before{
+    content:'▸';position:absolute;left:0;color:var(--accent-2);font-size:11px;top:2px;
+  }
+  .intern-skills{display:flex;flex-wrap:wrap;gap:8px;}
+  .intern-skill{
+    font-family:var(--mono);font-size:11.5px;border:1px solid var(--border);
+    padding:6px 12px;border-radius:20px;color:var(--text-muted);
+  }
+
+  /* DASHBOARDS */
+  .dashboard-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  @media (max-width:900px){.dashboard-grid{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:640px){.dashboard-grid{grid-template-columns:1fr;}}
+  .dashboard-slot{
+    background:var(--bg-panel);border:1px dashed var(--border);border-radius:12px;
+    overflow:hidden;transition:all .25s;
+  }
+  .dashboard-slot:hover{border-color:var(--accent-2);}
+  .dashboard-thumb{
+    aspect-ratio:16/10;background:var(--bg-panel-2);display:flex;flex-direction:column;
+    align-items:center;justify-content:center;gap:10px;color:var(--text-dim);
+  }
+  .dashboard-thumb--img{
+    aspect-ratio:16/10;overflow:hidden;
+  }
+  .dashboard-thumb--img img{
+    width:100%;height:100%;object-fit:cover;display:block;
+    transition:transform .35s ease;
+  }
+  .dashboard-slot:hover .dashboard-thumb--img img{transform:scale(1.04);}
+  .dashboard-thumb svg{width:32px;height:32px;opacity:0.5;}
+  .dashboard-thumb span{font-family:var(--mono);font-size:11px;letter-spacing:0.04em;}
+  .dashboard-info{padding:18px 20px;}
+  .dashboard-badge{
+    font-family:var(--mono);font-size:10.5px;letter-spacing:0.06em;
+    display:inline-block;padding:4px 10px;border-radius:20px;margin-bottom:10px;
+  }
+  .dashboard-badge--bi{color:var(--accent-2);background:var(--accent-2-soft);}
+  .dashboard-badge--excel{color:#6BCB77;background:rgba(107,203,119,0.14);}
+  .dashboard-info h4{font-family:var(--display);font-size:15px;font-weight:600;color:var(--text);margin-bottom:6px;}
+  .dashboard-info p{font-size:12.5px;color:var(--text-muted);}
+
+  /* PROJECTS */
+  .proj-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;}
+  @media (max-width:800px){.proj-grid{grid-template-columns:1fr;}}
+  .proj-card{
+    background:var(--bg-panel);border:1px solid var(--border);border-radius:12px;
+    padding:26px;transition:all .25s;position:relative;overflow:hidden;
+  }
+  .proj-card:hover{border-color:var(--accent-2);transform:translateY(-3px);}
+  .proj-tag{
+    font-family:var(--mono);font-size:10.5px;letter-spacing:0.06em;color:var(--accent-2);
+    background:var(--accent-2-soft);display:inline-block;padding:4px 10px;border-radius:20px;margin-bottom:16px;
+  }
+  .proj-card h3{font-family:var(--display);font-size:18px;margin-bottom:10px;font-weight:600;}
+  .proj-card p{color:var(--text-muted);font-size:14px;}
+
+  /* SKILLS */
+  .skills-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:40px 56px;}
+  @media (max-width:800px){.skills-grid{grid-template-columns:1fr;}}
+  .skill-row{margin-bottom:20px;}
+  .skill-row:last-child{margin-bottom:0;}
+  .skill-label{display:flex;justify-content:space-between;font-size:13.5px;margin-bottom:8px;}
+  .skill-label .lvl{font-family:var(--mono);color:var(--text-dim);font-size:11.5px;}
+  .skill-bar{height:5px;background:var(--bg-panel-2);border-radius:4px;overflow:hidden;}
+  .skill-fill{
+    height:100%;background:linear-gradient(90deg,var(--accent-2),var(--accent));
+    width:0;transition:width 1.1s cubic-bezier(.2,.8,.2,1);border-radius:4px;
+  }
+  .tool-cloud{display:flex;flex-wrap:wrap;gap:10px;}
+  .tool-chip{
+    font-family:var(--mono);font-size:12.5px;border:1px solid var(--border);
+    padding:8px 14px;border-radius:20px;color:var(--text-muted);transition:all .2s;
+  }
+  .tool-chip:hover{border-color:var(--accent);color:var(--accent);}
+
+  /* FRAMEWORK */
+  .fw-progress{margin-bottom:52px;}
+  .fw-progress-track{height:3px;background:var(--bg-panel-2);border-radius:3px;overflow:hidden;}
+  .fw-progress-fill{
+    height:100%;width:0%;border-radius:3px;
+    background:linear-gradient(90deg,var(--accent-2),var(--accent));
+    transition:width .15s linear;
+  }
+  .fw-timeline{position:relative;padding:8px 0 0;}
+  .fw-timeline::before{
+    content:'';position:absolute;left:50%;top:0;bottom:0;width:1px;
+    background:var(--border);transform:translateX(-50%);
+  }
+  .fw-item{position:relative;width:calc(50% - 46px);margin-bottom:60px;}
+  .fw-item:last-child{margin-bottom:0;}
+  .fw-item:nth-child(odd){margin-right:auto;}
+  .fw-item:nth-child(even){margin-left:auto;}
+  .fw-node{
+    position:absolute;top:26px;width:34px;height:34px;border-radius:50%;
+    background:var(--bg-panel);border:1px solid var(--border);
+    display:flex;align-items:center;justify-content:center;z-index:2;
+    font-family:var(--mono);font-size:11.5px;color:var(--text-dim);
+    transition:all .3s ease;
+  }
+  .fw-item:nth-child(odd) .fw-node{right:-63px;}
+  .fw-item:nth-child(even) .fw-node{left:-63px;}
+  .fw-item.reveal.visible .fw-node{
+    border-color:var(--accent);color:var(--accent);box-shadow:0 0 0 4px var(--accent-soft);
+  }
+  @media (max-width:900px){
+    .fw-timeline::before{left:17px;}
+    .fw-item{width:100%;margin-left:0 !important;margin-right:0 !important;padding-left:58px;}
+    .fw-item .fw-node{left:0 !important;right:auto !important;top:0;}
+  }
+  .fw-card{
+    background:var(--bg-panel);border:1px solid var(--border);border-radius:14px;
+    padding:26px;transition:all .3s ease;position:relative;overflow:hidden;cursor:pointer;
+  }
+  .fw-card::before{
+    content:'';position:absolute;top:0;left:0;right:0;height:1px;
+    background:linear-gradient(90deg,transparent,var(--accent-2),transparent);
+  }
+  .fw-card:hover{
+    transform:translateY(-4px);border-color:var(--accent-2);
+    box-shadow:0 16px 36px rgba(0,0,0,0.35);
+  }
+  .fw-card:hover .fw-icon{transform:rotate(-8deg) scale(1.08);}
+  .fw-card:hover .fw-thumb{border-color:var(--accent-2);}
+  .fw-card:hover .fw-thumb-inner img{transform:scale(1.05);}
+  .fw-card-top{display:flex;gap:16px;align-items:flex-start;margin-bottom:14px;}
+  .fw-icon{
+    font-size:24px;width:50px;height:50px;flex-shrink:0;border-radius:12px;
+    background:var(--accent-soft);display:flex;align-items:center;justify-content:center;
+    transition:transform .3s ease;
+  }
+  .fw-step-label{
+    font-family:var(--mono);font-size:11px;letter-spacing:0.08em;color:var(--accent);margin-bottom:4px;
+  }
+  .fw-card h3{font-family:var(--display);font-size:18px;font-weight:600;}
+  .fw-desc{color:var(--text-muted);font-size:14px;margin-bottom:18px;}
+  .fw-thumb{
+    aspect-ratio:16/9;border:1px dashed var(--border);border-radius:10px;
+    background:var(--bg-panel-2);display:flex;align-items:center;justify-content:center;
+    margin-bottom:16px;overflow:hidden;transition:border-color .25s;
+  }
+  .fw-thumb span{
+    font-family:var(--mono);font-size:11.5px;color:var(--text-dim);
+    letter-spacing:0.03em;padding:0 18px;text-align:center;
+  }
+  .fw-tools{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;}
+  .fw-toggle{
+    font-family:var(--mono);font-size:11px;color:var(--text-dim);background:none;border:none;
+    display:flex;align-items:center;gap:6px;cursor:pointer;padding:0;
+  }
+  .fw-toggle .chev{transition:transform .25s;display:inline-block;}
+  .fw-item.open .fw-toggle .chev{transform:rotate(90deg);}
+  .fw-item.open .fw-node{background:var(--accent);border-color:var(--accent);}
+  .fw-expand{max-height:0;overflow:hidden;transition:max-height .4s ease;}
+  .fw-item.open .fw-expand{max-height:220px;}
+  .fw-expand p{padding-top:14px;color:var(--text-muted);font-size:13.5px;border-top:1px dashed var(--border);margin-top:4px;}
+
+  .fw-tech{margin-top:64px;}
+
+  .fw-kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:56px;}
+  @media (max-width:900px){.fw-kpi-grid{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:480px){.fw-kpi-grid{grid-template-columns:1fr;}}
+  .fw-kpi{
+    background:var(--bg-panel);border:1px solid var(--border);border-radius:12px;
+    padding:22px;text-align:center;transition:border-color .25s;
+  }
+  .fw-kpi:hover{border-color:var(--accent);}
+  .fw-kpi .num{font-family:var(--mono);font-size:26px;font-weight:500;color:var(--text);}
+  .fw-kpi .num .suffix{color:var(--accent);}
+  .fw-kpi .label{font-size:12px;color:var(--text-dim);margin-top:6px;}
+
+  .fw-gallery{display:grid;gap:8px;margin-bottom:16px;}
+  .fw-gallery.count-1{grid-template-columns:1fr;}
+  .fw-gallery.count-1 img{aspect-ratio:16/9;}
+  .fw-gallery.count-2{grid-template-columns:1fr 1fr;}
+  .fw-gallery.count-2 img{aspect-ratio:4/3;}
+  .fw-gallery.count-3{grid-template-columns:1fr 1fr 1fr;}
+  .fw-gallery.count-3 img{aspect-ratio:3/4;}
+  .fw-gallery img{
+    width:100%;height:100%;object-fit:cover;display:block;cursor:zoom-in;
+    border:1px solid var(--border);border-radius:8px;background:var(--bg-panel-2);
+    transition:transform .3s ease, border-color .25s ease;
+  }
+  .fw-gallery img:hover{transform:scale(1.03);border-color:var(--accent-2);}
+
+  .fw-lightbox{
+    position:fixed;inset:0;z-index:1000;padding:40px;
+    background:rgba(6,9,12,0.92);backdrop-filter:blur(4px);
+    display:flex;align-items:center;justify-content:center;
+    opacity:0;pointer-events:none;transition:opacity .25s ease;
+  }
+  .fw-lightbox.open{opacity:1;pointer-events:auto;}
+  .fw-lightbox img{
+    max-width:90vw;max-height:85vh;border-radius:10px;
+    border:1px solid var(--border);box-shadow:0 24px 64px rgba(0,0,0,0.5);
+  }
+  .fw-lightbox-close{
+    position:absolute;top:24px;right:28px;width:40px;height:40px;border-radius:50%;
+    background:var(--bg-panel);border:1px solid var(--border);color:var(--text);
+    display:flex;align-items:center;justify-content:center;cursor:pointer;
+    font-size:18px;transition:border-color .2s,color .2s;
+  }
+  .fw-lightbox-close:hover{border-color:var(--accent);color:var(--accent);}
+
+  /* EDUCATION */
+  .edu-timeline{position:relative;padding-left:32px;border-left:1px solid var(--border);}
+  .edu-item{position:relative;padding-bottom:40px;}
+  .edu-item:last-child{padding-bottom:0;}
+  .edu-dot{
+    position:absolute;left:-37px;top:28px;width:12px;height:12px;border-radius:50%;
+    background:var(--bg);border:2px solid var(--text-dim);transition:all .3s ease;
+  }
+  .edu-item.reveal.visible .edu-dot{
+    border-color:var(--accent);background:var(--accent);box-shadow:0 0 0 4px var(--accent-soft);
+  }
+  .edu-card{
+    background:var(--bg-panel);border:1px solid var(--border);border-radius:14px;
+    padding:30px;position:relative;overflow:hidden;transition:all .3s ease;
+  }
+  .edu-card::before{
+    content:'';position:absolute;top:0;left:0;right:0;height:1px;
+    background:linear-gradient(90deg,transparent,var(--accent-2),transparent);
+  }
+  .edu-card:hover{
+    transform:translateY(-4px);border-color:var(--accent-2);
+    box-shadow:0 16px 36px rgba(0,0,0,0.35);
+  }
+  .edu-card:hover .edu-icon{transform:rotate(-8deg) scale(1.08);}
+  .edu-card-top{display:flex;gap:16px;align-items:flex-start;margin-bottom:14px;}
+  .edu-icon{
+    font-size:24px;width:52px;height:52px;flex-shrink:0;border-radius:12px;
+    background:var(--accent-soft);display:flex;align-items:center;justify-content:center;
+    transition:transform .3s ease;
+  }
+  .edu-year{
+    font-family:var(--mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;
+    color:var(--accent);margin-bottom:6px;
+  }
+  .edu-card h3{font-family:var(--display);font-size:19px;font-weight:600;margin-bottom:4px;}
+  .edu-univ{color:var(--accent-2);font-size:13.5px;font-weight:500;}
+  .edu-desc{color:var(--text-muted);font-size:14.5px;margin-bottom:18px;}
+  .edu-focus{display:flex;flex-wrap:wrap;gap:8px;}
+  .edu-focus .intern-skill{transition:all .2s;}
+  .edu-focus .intern-skill:hover{border-color:var(--accent);color:var(--accent);}
+  @media (max-width:900px){
+    .edu-timeline{padding-left:28px;}
+    .edu-dot{left:-33px;}
+  }
+  @media (max-width:640px){
+    .edu-card{padding:24px;}
+  }
+
+  /* CERTS */
+  .cert-list{display:flex;flex-direction:column;gap:1px;background:var(--border);border-radius:10px;overflow:hidden;}
+  .cert-item{background:var(--bg-panel);padding:18px 22px;display:flex;justify-content:space-between;align-items:center;}
+  .cert-item .name{font-size:14.5px;color:var(--text);}
+  .cert-item .org{font-family:var(--mono);font-size:12px;color:var(--text-dim);}
+
+  /* CONTACT */
+  .contact-panel{
+    background:var(--bg-panel);border:1px solid var(--border);border-radius:16px;
+    padding:56px;text-align:center;position:relative;overflow:hidden;
+  }
+  .contact-panel::before{
+    content:'';position:absolute;bottom:-140px;left:50%;transform:translateX(-50%);
+    width:400px;height:280px;background:radial-gradient(ellipse,var(--accent-soft),transparent 70%);
+  }
+  .contact-panel h2{font-family:var(--display);font-size:clamp(26px,4vw,36px);margin-bottom:14px;}
+  .contact-panel p{color:var(--text-muted);max-width:440px;margin:0 auto 36px;font-size:15px;}
+  .contact-links{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;position:relative;z-index:1;}
+  .contact-link{
+    display:flex;align-items:center;gap:10px;background:var(--bg-panel-2);
+    border:1px solid var(--border);padding:12px 20px;border-radius:10px;font-size:14px;font-weight:500;
+    transition:all .2s;
+  }
+  .contact-link:hover{border-color:var(--accent);transform:translateY(-2px);}
+  .contact-link svg{width:18px;height:18px;flex-shrink:0;}
+
+  footer{padding:40px 0;border-top:1px solid var(--border);margin-top:60px;}
+  .footer-row{display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:12px;color:var(--text-dim);flex-wrap:wrap;gap:12px;}
+
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease, transform .6s ease;}
+  .reveal.visible{opacity:1;transform:translateY(0);}
+</style>
+</head>
+<body>
+
+<div class="grid-bg"></div>
+<div class="glow"></div>
+
+<header>
+  <nav>
+    <div class="logo"><span class="dot"></span> SHAID MAHMUD</div>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#internships">Internships</a>
+      <a href="#education">Education</a>
+      <a href="#dashboards">Dashboards</a>
+      <a href="#framework">Framework</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a href="#contact" class="nav-cta">Let's talk →</a>
+    <button class="burger" id="burger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#about">About</a>
+    <a href="#experience">Experience</a>
+    <a href="#internships">Internships</a>
+    <a href="#education">Education</a>
+    <a href="#dashboards">Dashboards</a>
+    <a href="#framework">Framework</a>
+    <a href="#projects">Projects</a>
+    <a href="#skills">Skills</a>
+    <a href="#contact">Contact</a>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- HERO -->
+  <section class="hero" id="top">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-eyebrow"><span class="bracket">[</span> Amazon FBA · Data Strategy <span class="bracket">]</span></div>
+        <h1>I turn marketplace<br>data into <span class="accent-text">scalable</span><br>product bets.</h1>
+        <p class="hero-desc">Product Analyst specializing in e-commerce market analysis, competitor and trend research, demand forecasting, product development, and budget estimation — backed by an MSc in Applied Statistics and a habit of automating whatever slows the team down.</p>
+        <div class="hero-cta-group">
+          <a href="#projects" class="btn-primary">View my work</a>
+          <a href="#contact" class="btn-secondary">Get in touch</a>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <div class="num"><span class="counter" data-target="12">0</span><span class="suffix">+</span></div>
+            <div class="label">Amazon brands managed</div>
+          </div>
+          <div class="hero-stat">
+            <div class="num"><span class="counter" data-target="6">0</span></div>
+            <div class="label">Cross-functional leadership</div>
+          </div>
+          <div class="hero-stat">
+            <div class="num"><span class="counter" data-target="4">0</span></div>
+            <div class="label">Projects</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="dash-card" id="dashCard">
+        <div class="dash-head">
+          <div class="title">PRODUCT SCOUT — LIVE FEED</div>
+          <div class="live"><span class="live-dot"></span> SCANNING</div>
+        </div>
+        <div id="scoutRows"></div>
+        <div class="dash-footer">
+          <span>Source: Keepa + Helium 10</span>
+          <span id="clock">--:--:--</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="eyebrow">01 · About</div>
+    <h2 class="section-title reveal">Grounded in the data, built for the marketplace.</h2>
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p>I'm a <strong>business strategy and product development professional</strong> with expertise in Amazon marketplace expansion, product commercialization, and data-driven decision-making. I currently work as an <strong>Amazon FBA Expert</strong> at <strong>DigiCare IT Ltd.</strong>, driving account performance through strategic product research, PPC campaign management, and listing optimization. Previously, I worked closely with the CEO at <strong>Mainul Extension</strong>, helping shape business strategy by identifying profitable product opportunities, leading supplier negotiations, and driving strategic initiatives across multiple Amazon marketplaces.</p>
+        <p>I run comprehensive market research, competitor analysis, profitability assessments, and demand forecasting to surface high-growth opportunities, then work directly with manufacturers and suppliers to develop competitive products and negotiate commercial terms through to launch.</p>
+        <p>With a BSc in Computer Science and an MSc in Applied Statistics and Data Science, I combine analytical thinking with business strategy — using Python, SQL, R, Power BI, Excel, SPSS, Tableau, and AI-powered analytics tools to automate analysis, build dashboards, and turn complex market data into decisions leadership can act on.</p>
+      </div>
+      <div class="fact-list reveal">
+        <div class="fact-row"><span class="k">ROLE</span><span class="v">Amazon FBA Expert</span></div>
+        <div class="fact-row"><span class="k">LOCATION</span><span class="v">Dhaka, Bangladesh</span></div>
+        <div class="fact-row"><span class="k">EDUCATION</span><span class="v">MSc Applied Statistics &amp; Data Science</span></div>
+        <div class="fact-row"><span class="k">EDUCATION</span><span class="v">BSc Computer Science &amp; Engineering</span></div>
+        <div class="fact-row"><span class="k">TOP SKILLS</span><span class="v">Business Strategy, Executive Decision Support, Stakeholder Management</span></div>
+        <div class="fact-row"><span class="k">LANGUAGES</span><span class="v">English, Bangla — fluent</span></div>
+        <div class="fact-row"><span class="k">FOCUS</span><span class="v">FBA &amp; wholesale product research</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="eyebrow">02 · Experience</div>
+    <h2 class="section-title reveal">Where the work happened.</h2>
+    <p class="section-sub reveal">Click any role to expand it. Seven positions, one throughline: turning raw data into decisions.</p>
+
+    <div class="timeline reveal" id="timeline">
+      <div class="tl-item current open">
+        <div class="tl-dot"></div>
+        <div class="tl-header">
+          <div>
+            <div class="tl-role">Amazon FBA Expert</div>
+            <div class="tl-company">DigiCare IT Ltd.</div>
+          </div>
+          <div class="tl-date">Sep 2026 — Present</div>
+        </div>
+        <div class="tl-toggle"><span class="chev">▸</span> View responsibilities</div>
+        <div class="tl-body">
+          <ul>
+            <li>Partner with cross-functional teams and key stakeholders to execute strategic growth initiatives across global Amazon marketplaces.</li>
+            <li>Drive account performance by conducting end-to-end product research, competitor benchmarking, demand forecasting, risk assessments, and supplier sourcing.</li>
+            <li>Manage full-cycle listing creation and optimization, applying keyword research and targeted SEO strategies to maximize organic search rankings.</li>
+            <li>Design, manage, and scale high-ROI Amazon PPC campaigns, refining target keywords and ad spend to improve product visibility and lower acquisition costs.</li>
+            <li>Prepare high-level business proposals, decision-making reports, and performance dashboards for upper management.</li>
+            <li>Analyze sales data, address growth bottlenecks, and maintain platform policy compliance to deliver scalable, data-driven solutions.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-header">
+          <div>
+            <div class="tl-role">Executive Assistant to CEO <span style="color:var(--text-dim);font-weight:400;font-size:14px;">(Business Strategy &amp; Product Dev — Project Basis)</span></div>
+            <div class="tl-company">Mainul Extension</div>
+          </div>
+          <div class="tl-date">Apr 2026 — Sep 2026</div>
+        </div>
+        <div class="tl-toggle"><span class="chev">▸</span> View responsibilities</div>
+        <div class="tl-body">
+          <ul>
+            <li>Partner closely with the CEO to execute strategic business initiatives across multiple Amazon marketplaces.</li>
+            <li>Identify high-potential product opportunities through market research, competitor analysis, demand forecasting, and profitability assessments.</li>
+            <li>Source and negotiate with global suppliers on product development, pricing, MOQs, quality standards, and production timelines.</li>
+            <li>Evaluate product viability through cost, logistics, and ROI analyses.</li>
+            <li>Prepare executive presentations, business proposals, dashboards, and strategic reports for key stakeholders.</li>
+            <li>Analyze marketplace performance to recommend growth strategies and optimize product portfolios.</li>
+            <li>Coordinate cross-functional teams and suppliers for successful product launches, and monitor market trends to drive sustainable growth.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-header">
+          <div>
+            <div class="tl-role">Account Manager</div>
+            <div class="tl-company">Area71 Venture Limited</div>
+          </div>
+          <div class="tl-date">Sep 2025 — Mar 2026</div>
+        </div>
+        <div class="tl-toggle"><span class="chev">▸</span> View responsibilities</div>
+        <div class="tl-body">
+          <ul>
+            <li>Led cross-functional teams across Product Research, Supplier Research, Content, Graphics, and PPC to execute business strategies with precision.</li>
+            <li>Oversaw project delivery, quality standards, and aligned team efforts with revenue and growth targets.</li>
+            <li>Monitored sales performance, tracked KPIs, and implemented process improvements to drive efficiency.</li>
+            <li>Coordinated with the Business Strategy team to translate strategic goals into actionable tasks and optimized workflows.</li>
+            <li>Evaluated team performance, prepared progress reports, and maintained structured communication protocols.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-header">
+          <div>
+            <div class="tl-role">Executive – Product Analyst</div>
+            <div class="tl-company">Area71 Venture Limited</div>
+          </div>
+          <div class="tl-date">Nov 2024 — Sep 2025</div>
+        </div>
+        <div class="tl-toggle"><span class="chev">▸</span> View responsibilities</div>
+        <div class="tl-body">
+          <ul>
+            <li>Conducted in-depth market research to identify high-potential products for the Amazon marketplace.</li>
+            <li>Analyzed market trends, customer behavior, and competition to support data-driven product selection.</li>
+            <li>Performed demand forecasting, profitability analysis, and competitor benchmarking to evaluate product viability.</li>
+            <li>Communicated with suppliers to support product development, negotiate pricing, and estimate project budgets.</li>
+            <li>Collaborated with cross-functional teams to align product strategy, manage sourcing, and optimize market positioning.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-header">
+          <div>
+            <div class="tl-role">Customer Acquisition Specialist</div>
+            <div class="tl-company">Hishabee Technology Limited</div>
+          </div>
+          <div class="tl-date">Oct 2023 — May 2024</div>
+        </div>
+        <div class="tl-toggle"><span class="chev">▸</span> View responsibilities</div>
+        <div class="tl-body">
+          <ul>
+            <li>Led customer outreach efforts, promoting company services to grow the client base.</li>
+            <li>Managed CRM systems, ensuring accurate data entry and detailed reporting.</li>
+            <li>Conducted market research, lead generation, and product promotion to identify new opportunities.</li>
+            <li>Built and maintained a prospect pipeline through cold calling, email, and follow-ups.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-header">
+          <div>
+            <div class="tl-role">Executive, Data Validation &amp; Visualization</div>
+            <div class="tl-company">Sohoz Seba</div>
+          </div>
+          <div class="tl-date">Apr 2023 — Oct 2023</div>
+        </div>
+        <div class="tl-toggle"><span class="chev">▸</span> View responsibilities</div>
+        <div class="tl-body">
+          <ul>
+            <li>Maintained data quality through regular validation and cleansing procedures.</li>
+            <li>Built visualizations and reports that surfaced actionable insight.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-header">
+          <div>
+            <div class="tl-role">Junior Territory Executive</div>
+            <div class="tl-company">Uber</div>
+          </div>
+          <div class="tl-date">Sep 2022 — Mar 2023</div>
+        </div>
+        <div class="tl-toggle"><span class="chev">▸</span> View responsibilities</div>
+        <div class="tl-body">
+          <ul>
+            <li>Played a key role in territory sales, engaging in client outreach and up-selling services.</li>
+            <li>Ensured successful onboarding of new clients through comprehensive background checks.</li>
+            <li>Helped develop and maintain business strategies.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTERNSHIPS -->
+  <section id="internships">
+    <div class="eyebrow">03 · Internships</div>
+    <h2 class="section-title reveal">Where the fundamentals were built.</h2>
+    <p class="section-sub reveal">Two internships, two very different lessons in how data drives decisions.</p>
+    <div class="intern-grid">
+      <div class="intern-card reveal">
+        <span class="intern-tag">DATA ANALYTICS</span>
+        <h3>Big Data (Data Analytics) Intern</h3>
+        <div class="intern-company">Institute of Information Technology (IIT), University of Dhaka</div>
+        <div class="intern-date">May 2023 — August 2023</div>
+        <div class="intern-label">Key Takeaways</div>
+        <ul class="intern-takeaways">
+          <li>Developed a strong foundation in data analytics and statistical thinking.</li>
+          <li>Learned to transform raw data into actionable business insights.</li>
+          <li>Improved reporting and business intelligence skills.</li>
+          <li>Strengthened problem-solving through real-world analytical projects.</li>
+        </ul>
+        <div class="intern-label">What I Learned</div>
+        <p>During my internship at IIT, I gained practical experience in working with real-world datasets and applying data analytics techniques to solve business problems. I learned the complete data analysis workflow, from collecting and cleaning raw data to identifying meaningful patterns and transforming complex information into actionable business insights. This experience strengthened my analytical thinking and demonstrated how data-driven decisions can improve organizational performance and strategic planning.</p>
+        <div class="intern-label">Skills I Mastered</div>
+        <div class="intern-skills">
+          <span class="intern-skill">Data Cleaning &amp; Preprocessing</span>
+          <span class="intern-skill">Exploratory Data Analysis (EDA)</span>
+          <span class="intern-skill">Statistical Analysis</span>
+          <span class="intern-skill">Trend &amp; Pattern Identification</span>
+          <span class="intern-skill">Report Writing &amp; Data Visualization</span>
+          <span class="intern-skill">Business Intelligence Fundamentals</span>
+        </div>
+      </div>
+
+      <div class="intern-card reveal">
+        <span class="intern-tag">OPERATIONS</span>
+        <h3>Operations Management Intern</h3>
+        <div class="intern-company">Youth School for Social Entrepreneurs (YSSE)</div>
+        <div class="intern-date">January 2023 — March 2023</div>
+        <div class="intern-label">Key Takeaways</div>
+        <ul class="intern-takeaways">
+          <li>Understood how efficient operations drive business success.</li>
+          <li>Gained experience in project coordination and resource management.</li>
+          <li>Improved communication and collaboration across departments.</li>
+          <li>Built a process-oriented mindset focused on continuous improvement.</li>
+        </ul>
+        <div class="intern-label">What I Learned</div>
+        <p>My internship at YSSE provided valuable exposure to business operations, project coordination, and cross-functional collaboration. I learned how effective workflow management, resource allocation, and communication contribute to successful project execution. Working with multiple teams enhanced my problem-solving abilities and taught me how to translate operational data into practical recommendations that improve efficiency and organizational outcomes.</p>
+        <div class="intern-label">Skills I Mastered</div>
+        <div class="intern-skills">
+          <span class="intern-skill">Operations Management</span>
+          <span class="intern-skill">Project Coordination</span>
+          <span class="intern-skill">Resource Planning &amp; Allocation</span>
+          <span class="intern-skill">Cross-functional Collaboration</span>
+          <span class="intern-skill">Teamwork &amp; Organizational Skills</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <div class="eyebrow">04 · Education</div>
+    <h2 class="section-title reveal">Education</h2>
+    <p class="section-sub reveal">My academic journey has provided a strong foundation in computer science, statistics, and data-driven decision-making, enabling me to bridge technology with business strategy.</p>
+
+    <div class="edu-timeline">
+      <div class="edu-item reveal">
+        <div class="edu-dot"></div>
+        <div class="edu-card">
+          <div class="edu-card-top">
+            <div class="edu-icon">🎓</div>
+            <div>
+              <div class="edu-year">Passing Year: 2025</div>
+              <h3>Master's in Applied Statistics and Data Science</h3>
+              <div class="edu-univ">Jahangirnagar University</div>
+            </div>
+          </div>
+          <p class="edu-desc">Completed a Master's degree specializing in Applied Statistics and Data Science, with a focus on statistical modeling, machine learning, predictive analytics, research methodology, and data-driven decision-making. The program strengthened my ability to analyze complex datasets, build predictive models, and translate analytical findings into strategic business insights.</p>
+          <div class="edu-focus">
+            <span class="intern-skill">Applied Statistics</span>
+            <span class="intern-skill">Machine Learning</span>
+            <span class="intern-skill">Predictive Analytics</span>
+            <span class="intern-skill">Data Science</span>
+            <span class="intern-skill">Statistical Modeling</span>
+            <span class="intern-skill">Business Analytics</span>
+            <span class="intern-skill">Research Methodology</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="edu-item reveal">
+        <div class="edu-dot"></div>
+        <div class="edu-card">
+          <div class="edu-card-top">
+            <div class="edu-icon">🎓</div>
+            <div>
+              <div class="edu-year">Passing Year: 2021</div>
+              <h3>Bachelor of Science in Computer Science and Engineering</h3>
+              <div class="edu-univ">Institute of Science, Trade and Technology (ISTT)</div>
+            </div>
+          </div>
+          <p class="edu-desc">Completed my undergraduate studies in Computer Science and Engineering, building a strong foundation in software development, programming, algorithms, databases, data structures, and problem-solving. This academic background supports my transition into business analytics, product strategy, and data-driven decision-making.</p>
+          <div class="edu-focus">
+            <span class="intern-skill">Computer Science</span>
+            <span class="intern-skill">Data Structures &amp; Algorithms</span>
+            <span class="intern-skill">Database Management</span>
+            <span class="intern-skill">Programming</span>
+            <span class="intern-skill">Web &amp; Software Development</span>
+            <span class="intern-skill">Problem Solving</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DASHBOARDS -->
+  <section id="dashboards">
+    <div class="eyebrow">05 · Dashboards</div>
+    <h2 class="section-title reveal">Excel &amp; Power BI dashboard work.</h2>
+    <p class="section-sub reveal">A showcase of Power BI and Excel dashboards built for reporting, KPI tracking, and business intelligence — each one turning raw data into decisions.</p>
+    <div class="dashboard-grid">
+      <div class="dashboard-slot reveal">
+        <div class="dashboard-thumb dashboard-thumb--img">
+          <img src="images/dashboard-bi01.jpg" alt="E-commerce Sales Analytics Dashboard in Power BI showing sales trends, category performance, channel split, and quarterly sales evolution" loading="lazy">
+        </div>
+        <div class="dashboard-info">
+          <div class="dashboard-badge dashboard-badge--bi">POWER BI · BI-01</div>
+          <h4>E-commerce Sales Analytics Dashboard</h4>
+          <p>Developed a modern Power BI dashboard to analyze sales performance across product categories, sales channels, yearly trends, and KPIs — enabling decision-makers to monitor performance and compare online vs offline sales through interactive visualizations.</p>
+        </div>
+      </div>
+      <div class="dashboard-slot reveal">
+        <div class="dashboard-thumb dashboard-thumb--img">
+          <img src="images/dashboard-ex02.jpg" alt="Excel dashboard with pivot-table-driven sales, profit, and customer KPIs by region and month" loading="lazy">
+        </div>
+        <div class="dashboard-info">
+          <div class="dashboard-badge dashboard-badge--excel">EXCEL · EX-02</div>
+          <h4>Data Professionals Survey Analytics Dashboard</h4>
+          <p>Designed an interactive Excel dashboard to monitor key sales metrics — revenue, profit, customer growth, regional performance, and monthly trends — using Pivot Tables, Pivot Charts, Slicers, and advanced Excel functions for dynamic filtering.</p>
+        </div>
+      </div>
+      <div class="dashboard-slot reveal">
+        <div class="dashboard-thumb dashboard-thumb--img">
+          <img src="images/dashboard-bi02.jpg" alt="Data Professional Survey Breakdown dashboard in Power BI showing survey demographics, salary by job title, and happiness metrics" loading="lazy">
+        </div>
+        <div class="dashboard-info">
+          <div class="dashboard-badge dashboard-badge--bi">POWER BI · BI-02</div>
+          <h4>Data Professionals Survey Analytics Dashboard</h4>
+          <p>Built an interactive Power BI dashboard exploring global survey data from data professionals — analyzing salary distribution, job roles, programming language preferences, work-life balance, and career challenges across the analytics industry.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FRAMEWORK -->
+  <section id="framework">
+    <div class="eyebrow">06 · Framework</div>
+    <h2 class="section-title reveal">Amazon Product Research &amp; Decision Framework</h2>
+    <p class="section-sub reveal">Every product recommendation follows a structured research methodology combining market intelligence, machine learning, financial modeling, supplier collaboration, and strategic analysis to identify profitable opportunities while minimizing business risk.</p>
+
+    <div class="fw-progress reveal" aria-hidden="true">
+      <div class="fw-progress-track"><div class="fw-progress-fill" id="fwProgressFill"></div></div>
+    </div>
+
+    <div class="fw-timeline" id="fwTimeline">
+
+      <div class="fw-item reveal">
+        <div class="fw-node">01</div>
+        <div class="fw-card">
+          <div class="fw-card-top">
+            <div class="fw-icon">📊</div>
+            <div>
+              <div class="fw-step-label">STEP 01</div>
+              <h3>Market Opportunity Analysis</h3>
+            </div>
+          </div>
+          <p class="fw-desc">Evaluate market size, monthly revenue, unit sales, and search demand to determine whether a product category has strong business potential.</p>
+          <div class="fw-gallery count-1">
+            <img src="images/fw-step01-01.png" alt="Amazon hand-made soap keyword niche summary with revenue, BSR and rating benchmarks">
+          </div>
+          <button class="fw-toggle" type="button"><span class="chev">▸</span> View details</button>
+          <div class="fw-expand"><p>Combines category-level revenue and unit-sales benchmarks with search demand signals to filter out categories that look attractive on the surface but lack durable buyer demand.</p></div>
+        </div>
+      </div>
+
+      <div class="fw-item reveal">
+        <div class="fw-node">02</div>
+        <div class="fw-card">
+          <div class="fw-card-top">
+            <div class="fw-icon">🔍</div>
+            <div>
+              <div class="fw-step-label">STEP 02</div>
+              <h3>Market Intelligence</h3>
+            </div>
+          </div>
+          <p class="fw-desc">Collect historical sales data, pricing, keyword insights, BSR history, search volume, and competitor metrics using Helium 10 and Amazon research tools.</p>
+          <div class="fw-gallery count-2">
+            <img src="images/fw-step02-01.png" alt="Helium 10 Xray product research results for coffin shelf search">
+            <img src="images/fw-step02-02.png" alt="Helium 10 Xray keyword niche summary for mens tshirt with ASIN-level sales data">
+          </div>
+          <div class="fw-tools">
+            <span class="intern-skill">Helium 10</span>
+            <span class="intern-skill">Keepa</span>
+            <span class="intern-skill">Amazon</span>
+          </div>
+          <button class="fw-toggle" type="button"><span class="chev">▸</span> View details</button>
+          <div class="fw-expand"><p>Pulls together pricing history, BSR trends, and keyword-level search volume so every downstream decision is grounded in real marketplace data rather than assumptions.</p></div>
+        </div>
+      </div>
+
+      <div class="fw-item reveal">
+        <div class="fw-node">03</div>
+        <div class="fw-card">
+          <div class="fw-card-top">
+            <div class="fw-icon">📈</div>
+            <div>
+              <div class="fw-step-label">STEP 03</div>
+              <h3>Machine Learning Market Growth</h3>
+            </div>
+          </div>
+          <p class="fw-desc">Use statistical analysis and machine learning models to calculate Year-over-Year market growth, identify long-term trends, and evaluate market stability.</p>
+          <div class="fw-gallery count-3">
+            <img src="images/fw-step03-01.png" alt="Year-by-year market growth rate table showing YoY percentage change">
+            <img src="images/fw-step03-02.png" alt="Overall search volume chart with trend line from 2019 to 2026">
+            <img src="images/fw-step03-03.png" alt="Average monthly search volume seasonality bar chart">
+          </div>
+          <button class="fw-toggle" type="button"><span class="chev">▸</span> View details</button>
+          <div class="fw-expand"><p>Applies regression and trend-decomposition models to separate genuine YoY growth from seasonal noise, flagging categories with stable long-term momentum.</p></div>
+        </div>
+      </div>
+
+      <div class="fw-item reveal">
+        <div class="fw-node">04</div>
+        <div class="fw-card">
+          <div class="fw-card-top">
+            <div class="fw-icon">📉</div>
+            <div>
+              <div class="fw-step-label">STEP 04</div>
+              <h3>Demand Forecasting</h3>
+            </div>
+          </div>
+          <p class="fw-desc">Forecast future demand using historical sales data and time-series analysis to estimate future market potential.</p>
+          <div class="fw-gallery count-2">
+            <img src="images/fw-step04-01.png" alt="Historical search volume with one-year forecast overlay chart">
+            <img src="images/fw-step04-02.png" alt="One-year search volume forecast line chart from May 2026 to April 2027">
+          </div>
+          <button class="fw-toggle" type="button"><span class="chev">▸</span> View details</button>
+          <div class="fw-expand"><p>Time-series models project demand forward, giving a realistic read on future market potential before any commitment to inventory or suppliers is made.</p></div>
+        </div>
+      </div>
+
+      <div class="fw-item reveal">
+        <div class="fw-node">05</div>
+        <div class="fw-card">
+          <div class="fw-card-top">
+            <div class="fw-icon">🎯</div>
+            <div>
+              <div class="fw-step-label">STEP 05</div>
+              <h3>Market Positioning</h3>
+            </div>
+          </div>
+          <p class="fw-desc">Analyze market maturity, competition level, pricing segments, and positioning opportunities to determine where a new product can succeed.</p>
+          <div class="fw-gallery count-2">
+            <img src="images/fw-step05-01.png" alt="Opportunity for a new seller notes on price gap strategy and feature-specific entry">
+            <img src="images/fw-step05-02.png" alt="Risk in this market notes on dominant market leaders and brand loyalty">
+          </div>
+          <button class="fw-toggle" type="button"><span class="chev">▸</span> View details</button>
+          <div class="fw-expand"><p>Maps pricing tiers and competitive density across the category to find the positioning gap a new entrant can realistically win.</p></div>
+        </div>
+      </div>
+
+      <div class="fw-item reveal">
+        <div class="fw-node">06</div>
+        <div class="fw-card">
+          <div class="fw-card-top">
+            <div class="fw-icon">🏆</div>
+            <div>
+              <div class="fw-step-label">STEP 06</div>
+              <h3>Competitor Research</h3>
+            </div>
+          </div>
+          <p class="fw-desc">Study top competitors, pricing strategies, product listings, reviews, branding, keywords, and customer engagement to uncover competitive advantages.</p>
+          <div class="fw-gallery count-1">
+            <img src="images/fw-step06-01.png" alt="Competitor research spreadsheet tracking portable printer listings by price, revenue, reviews and dimensions">
+          </div>
+          <button class="fw-toggle" type="button"><span class="chev">▸</span> View details</button>
+          <div class="fw-expand"><p>Benchmarks top listings on pricing, content, and engagement to surface concrete gaps a new product and listing strategy can exploit.</p></div>
+        </div>
+      </div>
+
+      <div class="fw-item reveal">
+        <div class="fw-node">07</div>
+        <div class="fw-card">
+          <div class="fw-card-top">
+            <div class="fw-icon">⭐</div>
+            <div>
+              <div class="fw-step-label">STEP 07</div>
+              <h3>Customer Pain Point Analysis</h3>
+            </div>
+          </div>
+          <p class="fw-desc">Analyze negative customer reviews to identify recurring issues and convert customer frustrations into product improvement opportunities.</p>
+          <div class="fw-gallery count-2">
+            <img src="images/fw-step07-01.png" alt="Table of bad reviews of a similar product on Amazon identifying recurring complaints">
+            <img src="images/fw-step07-02.png" alt="Improvement scope table converting each bad review into a product improvement">
+          </div>
+          <button class="fw-toggle" type="button"><span class="chev">▸</span> View details</button>
+          <div class="fw-expand"><p>Mines 1-3 star reviews across competing listings to identify recurring complaints, turning each one into a concrete product-improvement spec.</p></div>
+        </div>
+      </div>
+
+      <div class="fw-item reveal">
+        <div class="fw-node">08</div>
+        <div class="fw-card">
+          <div class="fw-card-top">
+            <div class="fw-icon">⚙️</div>
+            <div>
+              <div class="fw-step-label">STEP 08</div>
+              <h3>Product Development</h3>
+            </div>
+          </div>
+          <p class="fw-desc">Collaborate with suppliers on product customization, packaging, pricing, quality improvements, MOQ negotiation, and manufacturing specifications.</p>
+          <div class="fw-gallery count-2">
+            <img src="images/fw-step08-01.png" alt="A403 Portable A4 Thermal Printer core specifications and paper media support document">
+            <img src="images/fw-step08-02.png" alt="A403 printer key selling points, included accessories and landed cost breakdown">
+          </div>
+          <button class="fw-toggle" type="button"><span class="chev">▸</span> View details</button>
+          <div class="fw-expand"><p>Works directly with manufacturers to translate research findings into a manufacturing spec, negotiating MOQ, quality standards, and pricing along the way.</p></div>
+        </div>
+      </div>
+
+      <div class="fw-item reveal">
+        <div class="fw-node">09</div>
+        <div class="fw-card">
+          <div class="fw-card-top">
+            <div class="fw-icon">💰</div>
+            <div>
+              <div class="fw-step-label">STEP 09</div>
+              <h3>Profitability Analysis</h3>
+            </div>
+          </div>
+          <p class="fw-desc">Calculate manufacturing cost, shipping, Amazon fees, advertising cost, storage cost, ROI, and projected profit before making the final decision.</p>
+          <div class="fw-gallery count-3">
+            <img src="images/fw-step09-01.png" alt="Amazon Seller Central profitability calculator at $79.99 price point showing 16.41% net margin">
+            <img src="images/fw-step09-02.png" alt="Amazon Seller Central profitability calculator at $64.99 price point showing 5.88% net margin">
+            <img src="images/fw-step09-03.png" alt="Amazon Seller Central profitability calculator at $59.99 breakeven price point showing 1.20% net margin">
+          </div>
+          <button class="fw-toggle" type="button"><span class="chev">▸</span> View details</button>
+          <div class="fw-expand"><p>Rolls up landed cost, Amazon fees, advertising spend, and storage cost into a single ROI model that has to clear a minimum margin threshold before moving forward.</p></div>
+        </div>
+      </div>
+
+      <div class="fw-item reveal">
+        <div class="fw-node">10</div>
+        <div class="fw-card">
+          <div class="fw-card-top">
+            <div class="fw-icon">✅</div>
+            <div>
+              <div class="fw-step-label">STEP 10</div>
+              <h3>Final Business Decision</h3>
+            </div>
+          </div>
+          <p class="fw-desc">Combine every analysis into a final executive recommendation to determine whether the product should be launched or rejected.</p>
+          <div class="fw-gallery count-1">
+            <img src="images/fw-step10-01.png" alt="Strategic pricing and risk mitigation proposal with tiered launch, contingency and breakeven pricing">
+          </div>
+          <button class="fw-toggle" type="button"><span class="chev">▸</span> View details</button>
+          <div class="fw-expand"><p>Every prior step rolls up into a single go/no-go recommendation, presented to leadership with the supporting data behind it.</p></div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="fw-tech reveal">
+      <div class="eyebrow">Technology &amp; methods</div>
+      <div class="tool-cloud">
+        <span class="tool-chip">Helium 10</span>
+        <span class="tool-chip">Keepa</span>
+        <span class="tool-chip">Amazon Seller Central</span>
+        <span class="tool-chip">Microsoft Excel</span>
+        <span class="tool-chip">Power BI</span>
+        <span class="tool-chip">Python</span>
+        <span class="tool-chip">Machine Learning</span>
+        <span class="tool-chip">Time Series Forecasting</span>
+        <span class="tool-chip">Data Analytics</span>
+        <span class="tool-chip">Statistical Analysis</span>
+        <span class="tool-chip">Market Research</span>
+        <span class="tool-chip">Supplier Negotiation</span>
+        <span class="tool-chip">Product Development</span>
+        <span class="tool-chip">ROI Analysis</span>
+        <span class="tool-chip">Business Strategy</span>
+      </div>
+    </div>
+
+    <div class="fw-kpi-grid reveal">
+      <div class="fw-kpi">
+        <div class="num"><span class="counter" data-target="120">0</span><span class="suffix">+</span></div>
+        <div class="label">Products Researched</div>
+      </div>
+      <div class="fw-kpi">
+        <div class="num"><span class="counter" data-target="35">0</span><span class="suffix">+</span></div>
+        <div class="label">Markets Analyzed</div>
+      </div>
+      <div class="fw-kpi">
+        <div class="num"><span class="counter" data-target="40">0</span><span class="suffix">+</span></div>
+        <div class="label">Demand Forecasts</div>
+      </div>
+      <div class="fw-kpi">
+        <div class="num"><span class="counter" data-target="60">0</span><span class="suffix">+</span></div>
+        <div class="label">Competitor Reports</div>
+      </div>
+      <div class="fw-kpi">
+        <div class="num"><span class="counter" data-target="25">0</span><span class="suffix">+</span></div>
+        <div class="label">Supplier Discussions</div>
+      </div>
+      <div class="fw-kpi">
+        <div class="num"><span class="counter" data-target="45">0</span><span class="suffix">+</span></div>
+        <div class="label">Profitability Models</div>
+      </div>
+      <div class="fw-kpi">
+        <div class="num"><span class="counter" data-target="18">0</span><span class="suffix">+</span></div>
+        <div class="label">Launch Recommendations</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="eyebrow">07 · Projects</div>
+    <h2 class="section-title reveal">Tools I built to remove the busywork.</h2>
+    <p class="section-sub reveal">Each one started as a manual process that was taking too long.</p>
+    <div class="proj-grid">
+      <div class="proj-card reveal">
+        <span class="proj-tag">ML · TIME SERIES</span>
+        <h3>AI-Powered Demand Forecasting Engine</h3>
+        <p>A predictive analytics engine using machine learning and time series analysis to forecast market demand and optimize inventory planning.</p>
+      </div>
+      <div class="proj-card reveal">
+        <span class="proj-tag">POWER BI · KPI</span>
+        <h3>Amazon Operations &amp; Performance Dashboard</h3>
+        <p>Real-time performance tracking that automates team KPIs, task assignments, and stockout alerts — eliminating manual reporting.</p>
+      </div>
+      <div class="proj-card reveal">
+        <span class="proj-tag">PYTHON · APPS SCRIPT</span>
+        <h3>Automated Client &amp; Product Tracking System</h3>
+        <p>An automated CRM that centralizes client profiling and tracks products in real time by ASIN/SKU.</p>
+      </div>
+      <div class="proj-card reveal">
+        <span class="proj-tag">n8n · AI AGENT</span>
+        <h3>AI-Driven Support Agent</h3>
+        <p>A test project built with n8n that generates real-time responses to customer inquiries for Area71.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="eyebrow">08 · Skills</div>
+    <h2 class="section-title reveal">The stack behind the strategy.</h2>
+    <div class="skills-grid">
+      <div class="reveal">
+        <div class="skill-row">
+          <div class="skill-label"><span>Amazon Product &amp; Supplier Research</span><span class="lvl">EXPERT</span></div>
+          <div class="skill-bar"><div class="skill-fill" data-level="95"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-label"><span>Power BI &amp; Advanced Excel</span><span class="lvl">EXPERT</span></div>
+          <div class="skill-bar"><div class="skill-fill" data-level="90"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-label"><span>Market &amp; Competitor Analysis</span><span class="lvl">ADVANCED</span></div>
+          <div class="skill-bar"><div class="skill-fill" data-level="88"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-label"><span>Python &amp; R</span><span class="lvl">ADVANCED</span></div>
+          <div class="skill-bar"><div class="skill-fill" data-level="80"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-label"><span>SPSS &amp; Statistical Modeling</span><span class="lvl">ADVANCED</span></div>
+          <div class="skill-bar"><div class="skill-fill" data-level="78"></div></div>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="eyebrow" style="margin-bottom:20px;">Tools &amp; platforms</div>
+        <div class="tool-cloud">
+          <span class="tool-chip">Keepa</span>
+          <span class="tool-chip">Helium 10</span>
+          <span class="tool-chip">Power BI</span>
+          <span class="tool-chip">Tableau</span>
+          <span class="tool-chip">Google Analytics</span>
+          <span class="tool-chip">SPSS</span>
+          <span class="tool-chip">Python</span>
+          <span class="tool-chip">SQL</span>
+          <span class="tool-chip">R</span>
+          <span class="tool-chip">Google Apps Script</span>
+          <span class="tool-chip">n8n</span>
+          <span class="tool-chip">Advanced Excel</span>
+        </div>
+
+        <div class="eyebrow" style="margin-top:36px;margin-bottom:20px;">Certifications</div>
+        <div class="cert-list">
+          <div class="cert-item">
+            <span class="name">Volunteerism: Connect, Engage &amp; Develop</span>
+            <span class="org">LEAD Academy</span>
+          </div>
+          <div class="cert-item">
+            <span class="name">Art of Problem Definition</span>
+            <span class="org">Imagen Ventures</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="eyebrow">09 · Contact</div>
+    <div class="contact-panel reveal">
+      <h2>Have a product to scale?</h2>
+      <p>Whether it's product research, supplier sourcing, or building the dashboard that finally kills your manual reporting — I'm open to a conversation.</p>
+      <div class="contact-links">
+        <a class="contact-link" href="https://wa.me/qr/P73XJA3CXRP5H1" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.5 3.5A11 11 0 0 0 3.6 17.3L2 22l4.8-1.6A11 11 0 1 0 20.5 3.5z"/><path d="M8.5 8.7c.2-.8.9-.8 1.3-.8.3 0 .6 0 .8.5.3.6.9 2 1 2.1.1.2.1.4 0 .6-.2.4-.4.6-.6.9-.2.2-.4.4-.2.8.2.4 1 1.6 2.1 2.5 1.4 1.2 2.2 1.5 2.6 1.3.4-.2.6-.5.8-.9.2-.3.5-.4.9-.2.4.1 2 1 2.3 1.1.3.2.5.3.6.4.1.2.1 1-.3 1.7-.4.7-1.9 1.5-2.7 1.5-.7 0-1.9-.2-4.3-1.6-3-1.8-4.9-5-5.1-5.3-.1-.2-1.1-1.5-1.1-2.9 0-1.4.7-2.1 1-2.4z"/></svg>
+          WhatsApp
+        </a>
+        <a class="contact-link" href="https://www.linkedin.com/in/shaid-mahmud-b6762b283/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 11v5M8 8v.01M12 16v-3.5a1.5 1.5 0 0 1 3 0V16M12 11v5"/></svg>
+          LinkedIn
+        </a>
+        <a class="contact-link" href="mailto:shaidmahmud5555@gmail.com">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+          Email
+        </a>
+        <a class="contact-link" href="https://www.facebook.com/shaid.mahmud.98" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M15 3h-2a5 5 0 0 0-5 5v2H6v4h2v7h4v-7h3l1-4h-4V8a1 1 0 0 1 1-1h3z"/></svg>
+          Facebook
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  <div class="footer-row">
+    <span>© 2026 SHAID MAHMUD — DHAKA, BANGLADESH</span>
+    <span>BUILT WITH DATA, RUN ON COFFEE</span>
+  </div>
+</footer>
+
+<div class="fw-lightbox" id="fwLightbox">
+  <button class="fw-lightbox-close" id="fwLightboxClose" aria-label="Close image">✕</button>
+  <img id="fwLightboxImg" src="" alt="">
+</div>
+
+<script>
+  // Mobile menu
+  const burger = document.getElementById('burger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  burger.addEventListener('click', () => {
+    mobileMenu.classList.toggle('open');
+    const isOpen = mobileMenu.classList.contains('open');
+    burger.setAttribute('aria-expanded', isOpen);
+  });
+  document.querySelectorAll('.mobile-menu a').forEach(a=>{
+    a.addEventListener('click', ()=> mobileMenu.classList.remove('open'));
+  });
+
+  // Scroll spy
+  const navLinks = document.querySelectorAll('.nav-links a');
+  const sections = document.querySelectorAll('main section');
+  const spyObserver = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        const id = entry.target.getAttribute('id');
+        navLinks.forEach(l=>{
+          l.classList.toggle('active', l.getAttribute('href') === '#'+id);
+        });
+      }
+    });
+  }, {rootMargin:'-40% 0px -50% 0px'});
+  sections.forEach(s=>spyObserver.observe(s));
+
+  // Reveal on scroll
+  const revealObserver = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, {threshold:0.15});
+  document.querySelectorAll('.reveal').forEach(el=>revealObserver.observe(el));
+
+  // Counters
+  const counters = document.querySelectorAll('.counter');
+  const counterObserver = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        const el = entry.target;
+        const target = parseInt(el.dataset.target,10);
+        let cur = 0;
+        const step = Math.max(1, Math.round(target/30));
+        const iv = setInterval(()=>{
+          cur += step;
+          if(cur>=target){cur=target; clearInterval(iv);}
+          el.textContent = cur;
+        }, 40);
+        counterObserver.unobserve(el);
+      }
+    });
+  }, {threshold:0.5});
+  counters.forEach(c=>counterObserver.observe(c));
+
+  // Skill bars
+  const fills = document.querySelectorAll('.skill-fill');
+  const fillObserver = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.style.width = entry.target.dataset.level + '%';
+        fillObserver.unobserve(entry.target);
+      }
+    });
+  }, {threshold:0.3});
+  fills.forEach(f=>fillObserver.observe(f));
+
+  // Timeline accordion
+  document.querySelectorAll('.tl-item').forEach(item=>{
+    item.querySelector('.tl-toggle').addEventListener('click', ()=>{
+      item.classList.toggle('open');
+    });
+  });
+
+  // Product scout dashboard — signature element
+  const products = [
+    {asin:'B0C9X2', name:'Bamboo Cutting Board Set', roi:34, trend:'up'},
+    {asin:'B0F7K1', name:'Silicone Baking Mats', roi:28, trend:'up'},
+    {asin:'B0A3M9', name:'Magnetic Spice Tins', roi:-6, trend:'down'},
+    {asin:'B0D5R4', name:'Collapsible Travel Mug', roi:41, trend:'up'},
+    {asin:'B0K8T2', name:'LED Desk Organizer', roi:19, trend:'up'},
+  ];
+  function sparkPath(trend){
+    const pts = trend==='up'
+      ? [18,14,15,10,8,4,2]
+      : [4,6,9,8,12,15,18];
+    return pts.map((y,i)=>`${i*(56/(pts.length-1))},${y}`).join(' ');
+  }
+  const scoutRows = document.getElementById('scoutRows');
+  function renderScout(){
+    scoutRows.innerHTML = '';
+    products.forEach((p,i)=>{
+      const roi = (p.roi + (Math.random()*4-2)).toFixed(1);
+      const trend = roi >= 0 ? 'up' : 'down';
+      const row = document.createElement('div');
+      row.className = 'scout-row';
+      row.style.animationDelay = (i*0.08)+'s';
+      row.innerHTML = `
+        <div>
+          <div class="scout-name">${p.name}</div>
+          <div class="scout-asin">${p.asin}</div>
+        </div>
+        <div class="scout-metrics">
+          <svg class="spark" viewBox="0 0 56 20"><polyline points="${sparkPath(trend)}" fill="none" stroke="${trend==='up' ? '#F5A623' : '#E36A6A'}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span class="scout-roi ${roi<0?'neg':''}">${roi>0?'+':''}${roi}%</span>
+        </div>`;
+      scoutRows.appendChild(row);
+    });
+  }
+  renderScout();
+  setInterval(renderScout, 4000);
+
+  // Framework — scroll progress line
+  const fwTimelineEl = document.getElementById('fwTimeline');
+  const fwProgressFill = document.getElementById('fwProgressFill');
+  if(fwTimelineEl && fwProgressFill){
+    function updateFwProgress(){
+      const rect = fwTimelineEl.getBoundingClientRect();
+      const vh = window.innerHeight;
+      const total = rect.height + vh * 0.5;
+      const scrolled = (vh * 0.8) - rect.top;
+      let pct = (scrolled / total) * 100;
+      pct = Math.max(0, Math.min(100, pct));
+      fwProgressFill.style.width = pct + '%';
+    }
+    window.addEventListener('scroll', updateFwProgress, {passive:true});
+    window.addEventListener('resize', updateFwProgress);
+    updateFwProgress();
+  }
+
+  // Framework — fullscreen image lightbox
+  const fwLightbox = document.getElementById('fwLightbox');
+  const fwLightboxImg = document.getElementById('fwLightboxImg');
+  const fwLightboxClose = document.getElementById('fwLightboxClose');
+  function openFwLightbox(src, alt){
+    fwLightboxImg.src = src;
+    fwLightboxImg.alt = alt || '';
+    fwLightbox.classList.add('open');
+  }
+  function closeFwLightbox(){
+    fwLightbox.classList.remove('open');
+  }
+  document.querySelectorAll('.fw-gallery img').forEach(img=>{
+    img.addEventListener('click', (e)=>{
+      e.stopPropagation();
+      openFwLightbox(img.getAttribute('src'), img.getAttribute('alt'));
+    });
+  });
+  fwLightboxClose.addEventListener('click', closeFwLightbox);
+  fwLightbox.addEventListener('click', (e)=>{
+    if(e.target === fwLightbox) closeFwLightbox();
+  });
+  document.addEventListener('keydown', (e)=>{
+    if(e.key === 'Escape') closeFwLightbox();
+  });
+
+  // Framework — click to expand cards
+  document.querySelectorAll('.fw-card').forEach(card=>{
+    card.addEventListener('click', ()=>{
+      card.closest('.fw-item').classList.toggle('open');
+    });
+  });
+
+  // Clock
+  function tick(){
+    const now = new Date();
+    document.getElementById('clock').textContent = now.toTimeString().slice(0,8);
+  }
+  tick();
+  setInterval(tick, 1000);
+</script>
+</body>
+</html>
